@@ -6,6 +6,8 @@ It looks like this:
 
 There is a button under the list of comments to copy them all and paste it into the AI's chat.
 
+README.txt has a couple more infos for installation (you need FFMPEG).
+
 ## Keyboard shortcuts
 
 | Key / action | Effect |
