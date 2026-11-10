@@ -294,6 +294,7 @@ class Window(QMainWindow):
 	def export(self):
 		if not self.store:
 			return
+		os.makedirs(self.folder(), exist_ok=True)
 		with open(self.store_path()[:-5] + ".txt", "w", encoding="utf-8") as f:
 			f.write(self.notes_text() + "\n")
 
@@ -307,14 +308,14 @@ class Window(QMainWindow):
 		if not info["width"]:
 			self.status.setText("Cannot read " + os.path.basename(path))
 			return
+		self.flush()
+		self.store = None
 		self.path, self.info = path, info
 		self.size = fit_size(info["width"], info["height"])
 		self.pos = 0.0
 		self.setWindowTitle("Review player — " + os.path.basename(path))
 		self.wave.set_data(None, info["duration"])
 		self.peaks.load(path)
-		self.flush()
-		self.store = None
 		self.set_version(self.pick_version())
 		self.refresh_marks()
 		force_fg(int(self.winId()))
